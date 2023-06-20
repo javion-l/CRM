@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.myfourm.mapper.dataAreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.myfourm.entity.dataArea">
+        <id column="daId" property="daId" />
+        <result column="daName" property="daName" />
+        <result column="delMark" property="delMark"/>
+    </resultMap>
+
+    <select id="getDaName" resultType="String" parameterType="int">
+        select d.daName from dataarea d where delMark = 1 and daId = #{daId}
+    </select>
+
+    <select id="getAreaList" resultMap="BaseResultMap">
+        select * from dataarea where delMark = 1 order by daId asc
+    </select>
+
+</mapper>

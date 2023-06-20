@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.myfourm.mapper.dataClientLevelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.myfourm.entity.dataClientLevel">
+        <id column="dclId" property="dclId" />
+        <result column="dclName" property="dclName" />
+        <result column="delMark" property="delMark"/>
+    </resultMap>
+
+
+    <select id="getLevelList" resultMap="BaseResultMap">
+        select * from dataclientlevel where delMark = 1 order by dclId asc
+    </select>
+
+</mapper>

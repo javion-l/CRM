@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.myfourm.mapper.sysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.myfourm.entity.sysUser">
+        <id column="userId" property="userId" />
+        <result column="userName" property="userName" />
+        <result column="userPassword" property="userPassword"/>
+        <result column="userRoleId" property="userRoleId" />
+        <result column="daId" property="daId" />
+        <result column="delMark" property="delMark" />
+        <result column="gmtCreate" property="gmtCreate" />
+        <result column="gmtModified" property="gmtModified" />
+        <result column="email" property="email" />
+        <result column="avatar" property="avatar" />
+    </resultMap>
+
+    <select id="getUserList" resultMap="BaseResultMap">
+        select * from sysuser where delMark = 1 order by gmtCreate desc
+    </select>
+
+    <select id="conditionSelect" resultMap="BaseResultMap">
+        select * from sysuser where delMark = 1
+            <if test="username != null and username != ''">
+                and userName like concat('%',#{username},'%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like concat('%',#{email},'%')
+            </if>
+    </select>
+
+
+
+</mapper>

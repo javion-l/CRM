@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/myforum.iml" filepath="$PROJECT_DIR$/.idea/myforum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myforum/myfourm.iml" filepath="$PROJECT_DIR$/myforum/myfourm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myforum/myfourm-server/myfourm-server.iml" filepath="$PROJECT_DIR$/myforum/myfourm-server/myfourm-server.iml" />
+    </modules>
+  </component>
+</project>
