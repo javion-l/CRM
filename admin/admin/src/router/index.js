@@ -50,6 +50,14 @@ const routes = [
                 component:()=>import('@/views/BaseData/level')
             },
             {
+                path:'/infomanage',
+                component:()=>import('@/views/ClientManage/InfoManage')
+            },
+            {
+                path:'/lostmanage',
+                component:()=>import('@/views/ClientManage/LostManage')
+            },
+            {
                 path:'/edituser',
                 // 编辑个人资料
                 component:()=>import('@/components/editdetail.vue')

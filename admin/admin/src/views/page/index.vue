@@ -54,8 +54,8 @@
               <span>客户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>客户信息管理</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>客户流失管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/infomanage"><i class="el-icon-tickets"></i>客户信息管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/lostmanage"><i class="el-icon-tickets"></i>客户流失管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
