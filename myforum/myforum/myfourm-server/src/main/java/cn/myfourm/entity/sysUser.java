@@ -52,4 +52,9 @@ public class sysUser implements Serializable {
     @TableField(exist = false)
     private String token;//token令牌
 
+    @TableField(fill = FieldFill.INSERT)
+    private Date gmtCreate;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date gmtModified;
+
 }
