@@ -65,11 +65,10 @@
               <span>服务管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>服务创建</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>服务分配</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>服务处理</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>服务反馈</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>服务归档</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/UnDueRequest"><i class="el-icon-tickets"></i>新建服务管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/PendingRequest"><i class="el-icon-tickets"></i>待处理服务管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/FeedbackRequest"><i class="el-icon-tickets"></i>待反馈服务管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/ArchivedRequest"><i class="el-icon-tickets"></i>已归档服务管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 

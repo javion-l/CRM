@@ -50,6 +50,22 @@ const routes = [
                 component:()=>import('@/views/BaseData/level')
             },
             {
+                path:'/UnDueRequest',
+                component:()=>import('@/views/Request/UnDue')
+            },
+            {
+                path:'/PendingRequest',
+                component:()=>import('@/views/Request/Pending')
+            },
+            {
+                path:'/FeedbackRequest',
+                component:()=>import('@/views/Request/Feedback')
+            },
+            {
+                path:'/ArchivedRequest',
+                component:()=>import('@/views/Request/Archived')
+            },
+            {
                 path:'/edituser',
                 // 编辑个人资料
                 component:()=>import('@/components/editdetail.vue')
