@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.myfourm.mapper.ClientInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.myfourm.entity.clientInfo">
+        <id column="clientCode" property="clientCode" />
+        <result column="clientName" property="clientName" />
+        <result column="clientAreaId" property="clientAreaId"/>
+        <result column="clientCustId" property="clientCustId" />
+        <result column="clientLevelId" property="clientLevelId" />
+        <result column="clientContentment" property="clientContentment" />
+        <result column="clientCredit" property="clientCredit" />
+        <result column="clientAddress" property="clientAddress" />
+        <result column="clientDakCode" property="clientDakCode" />
+        <result column="clientTel" property="clientTel" />
+        <result column="clientFax" property="clientFax" />
+        <result column="clientNet" property="clientNet" />
+        <result column="clientCharter" property="clientCharter" />
+        <result column="clientCorporation" property="clientCorporation" />
+        <result column="clientBankroll" property="clientBankroll" />
+        <result column="clientTurnoverYear" property="clientTurnoverYear" />
+        <result column="clientBank" property="clientBank" />
+        <result column="clientAccounts" property="clientAccounts" />
+        <result column="clientNativeTax" property="clientNativeTax" />
+        <result column="clientCountryTax" property="clientCountryTax" />
+        <result column="clientState" property="clientState" />
+        <result column="clientLoseReason" property="clientLoseReason" />
+        <result column="clientLoseDate" property="clientLoseDate" />
+    </resultMap>
+
+    <select id="getClientList" resultMap="BaseResultMap">
+        select * from clientinfo
+    </select>
+
+</mapper>

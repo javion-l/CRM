@@ -25,7 +25,7 @@
     <el-table
         :data="tableData"
         border
-        :row-style="{ height: '15px' }"
+        :row-style="{ height: '50px' }"
         :cell-style="{ padding: '0px' }"
         max-height="1000"
         style="width: 97%"
@@ -51,7 +51,7 @@
         <el-table-column prop="clientAddress" label="所在地区" width="150">
         </el-table-column>
 
-        <el-table-column prop="clientLevel" label="客户等级" width="130">
+        <el-table-column prop="clientLevelId" label="客户等级" width="130">
         </el-table-column>
 
         <el-table-column prop="clientCredit" label="客户信用度" width="130">
@@ -63,9 +63,10 @@
 
         <el-table-column fixed="right" label="操作" width="180" header-align="center">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="primary" size="small">编辑 <i class="el-icon-edit"></i></el-button>
+            <!-- TODO: 编辑功能尚未实现 需要编辑页面弹窗 -->
+            <el-button @click="handleClick(scope.row)" type="primary" size="small">编辑</el-button>
             <!-- TODO: 这里的历史订单需要联表查询 并且需要历史订单界面 -->
-            <el-button @click="" type="danger" size="small">历史订单 <i class="el-icon-remove-outline"></i></el-button>
+            <el-button @click="" type="danger" size="small">历史订单</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -93,55 +94,14 @@ import axios from "axios";
 export default {
 
   mounted() {
-    // this.$http.get(
-    //         `/role/getRole?uid=${JSON.parse(localStorage.getItem('userdata')).id}`,{
-    //           headers: {
-    //             Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-    //           }
-    //         }
-    // ).then(res=>{
-    //   let RoleName=res.data.obj;
-    //   if(RoleName.includes(this.pageName)){
-    //     this.hasRole=true;
-    //   }else{
-    //     this.hasRole=false;
-    //   }
-    //   if(this.hasRole==false){
-    //     this.$message.error("无权访问");
-    //     this.jump("/404");
-    //     return;
-    //   }
-    //   this.userdata();
-    // })
     this.userdata();
-    this.$http.get(
-            `/dataArea/getArea`,{
-              headers: {
-                Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-              }
-            }
-    ).then(res=>{
-      for (var i=0;i<res.data.obj.length;i++) {
-        // console.log(res.data.obj[i])
-        this.AreaMap[res.data.obj[i].daId]=res.data.obj[i].daName
-        this.AreaRMap[res.data.obj[i].daName]=res.data.obj[i].daId
-      }
-      this.AreaList=res.data.obj
-      console.log(this.AreaList)
-      console.log(this.AreaMap)
-      console.log(this.AreaRMap)
-    })
-
   },
-
-
   data() {
     return {
 
       clientName_select:"",
       clientAddress_select:"",
       clientLevel_select:"",
-
 
       total: 1000,
       // 分页
@@ -164,13 +124,11 @@ export default {
         this.clientLevel_select='';
     },
 
-
-
     // 获取第一页表格数据
     async userdata() {
 
       const result = await this.$http.get(
-        `/user/list?currentPage=${1}&size=${5}`,{
+        `/clientInfo/list?currentPage=${1}&size=${5}`,{
                 headers: {
                   Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
                 }
@@ -202,7 +160,7 @@ export default {
         console.log(`当前页: ${val}`);
         if(this.username_select==""&&this.email_select==""){
             const result = await this.$http.get(
-                    `/user/list?currentPage=${val}&size=${5}`,{
+                    `/clientInfo/list?currentPage=${val}&size=${5}`,{
                       headers: {
                         Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
                       }
@@ -215,7 +173,7 @@ export default {
             }
         }else{
             const result = await this.$http.get(
-                    `/user/conditionSelect?currentPage=${val}&size=${5}&userName=${this.username_select}&email=${this.email_select}`,{
+                    `/clientInfo/conditionSelect?currentPage=${val}&size=${5}&userName=${this.username_select}&email=${this.email_select}`,{
                       headers: {
                         Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
                       }
@@ -229,147 +187,6 @@ export default {
               this.$message.error("查询失败");
             }
       }
-
-    },
-
-    //条件查询
-    async conditionSelect(){
-      this.currentPage=1;
-      const result = await this.$http.get(
-            `/user/conditionSelect?currentPage=${1}&size=${5}&userName=${this.username_select}&email=${this.email_select}`,{
-              headers: {
-                Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-              }
-            }
-      );
-      if (result.status === 200) {
-        this.tableData = result.data.data;
-        this.total = Number(result.data.total);
-        this.$forceUpdate();
-        this.$message.success("查询成功");
-      } else {
-        this.$message.error("查询失败");
-      }
-    },
-
-
-    // 添加用户信息
-    submitadd() {
-      this.$refs.loginFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error("表单验证失败！");
-        if (this.form.roleName == "系统管理员") {
-          this.form.userRoleId = 1;
-        } else if (this.form.roleName == "销售主管") {
-          this.form.userRoleId = 2;
-        } else if (this.form.roleName == "客户经理") {
-          this.form.userRoleId = 3;
-        } else if (this.form.roleName == "高管") {
-          this.form.userRoleId = 4;
-        }
-        this.form.daId=this.AreaRMap[this.form.daName]
-        const result = await this.$http.post("/user/adminregister", this.form,{
-          headers: {
-            Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-          }
-        });
-        console.log("adduser", result);
-        if (result.data.code === 200) {
-          this.$message.success("添加成功!");
-          await this.userdata();
-          this.$forceUpdate();
-          this.dialogFormVisible = false;
-          //清除数据
-          this.form = {
-            avatar:"https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
-            userName: "",
-            userPassword: "",
-            userRoleId: "1",
-            roleName:"",
-            email: "",
-            daId:"1",
-            daName:"",
-          }
-        } else {
-          this.$message.error(result.data.message);
-        }
-      });
-    },
-
-    // 修改用户信息
-    async editdetail() {
-      console.log("修改用户信息", this.form1);
-      if (this.form1.roleName == "系统管理员") {
-        this.form1.userRoleId = 1;
-      } else if (this.form1.roleName == "销售主管") {
-        this.form1.userRoleId = 2;
-      } else if (this.form1.roleName == "客户经理") {
-        this.form1.userRoleId = 3;
-      } else if (this.form1.roleName == "高管") {
-        this.form1.userRoleId = 4;
-      }
-      this.form1.daId=this.AreaRMap[this.form1.daName]
-      const result = await this.$http.put("/user/infoModify", this.form1,{
-        headers: {
-          Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-        }
-      });
-      if (result.data.code === 200) {
-        this.$message.success("修改成功！");
-        await this.userdata();
-        this.$forceUpdate();
-        this.dialogFormVisible1 = false;
-      } else if (result.data.code === 500) {
-        this.$message.error(result.data.message);
-        this.userdata();
-      } else {
-        this.$message.error("修改失败!");
-      }
-    },
-
-    // 删除用户信息
-    deteleUser(user) {
-      this.$confirm("此操作将永久删除, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(async () => {
-          const result = await this.$http.delete("/user/delete?userId=" + user.userId,{
-            headers: {
-              Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-            }
-          });
-          if (result.data.code == 200) {
-            this.$message.success(result.data.message);
-            this.userdata();
-            this.$forceUpdate();
-          } else {
-            this.$message.error(result.data.message);
-          }
-        })
-    },
-
-    deleteBatch(){
-        let ids = this.multipleSelection.map(v=>v.userId);
-        this.$confirm("此操作将永久删除, 是否继续?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        })
-        .then(async () => {
-          const result = await this.$http.post("/user/deletebatch" , ids ,{
-            headers: {
-              Authorization: "Bearer " + JSON.parse(localStorage.getItem('userdata')).token
-            }
-          });
-          if (result.data.code == 200) {
-            this.$message.success(result.data.message);
-            this.userdata();
-            this.$forceUpdate();
-          } else {
-            this.$message.error(result.data.message);
-          }
-        })
     },
     // 封装上传文件请求
     doupload() {
