@@ -58,6 +58,16 @@ const routes = [
                 component:()=>import('@/views/ClientManage/LostManage')
             },
             {
+                path:'/salechancemanage',
+                component:()=>import('@/views/SaleManage/SaleChanceManage')
+
+            },
+            {
+                path:'/salechancedevelop',
+                component:()=>import('@/views/SaleManage/SaleChanceDevelop')
+
+            },
+            {
                 path:'/UnDueRequest',
                 component:()=>import('@/views/Request/UnDue')
             },
@@ -83,6 +93,7 @@ const routes = [
                 // 修改密码
                 component:()=>import('@/components/changepassword.vue')
             },
+            
             {
                 path:'/404',
                 component:()=>import('@/views/404.vue')

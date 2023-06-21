@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLEncoder;
+import java.io.File;
+import java.io.IOException;
 
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 @Slf4j
 @Component
 public class FileUpload {

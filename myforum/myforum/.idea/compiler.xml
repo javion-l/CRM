@@ -10,10 +10,11 @@
         <module name="myfourm-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="myfourm" options="-parameters" />
+      <module name="myfourm" options="" />
       <module name="myfourm-server" options="-parameters" />
     </option>
   </component>

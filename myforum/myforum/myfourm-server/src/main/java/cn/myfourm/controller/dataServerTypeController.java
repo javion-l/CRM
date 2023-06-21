@@ -1,32 +1,16 @@
 package cn.myfourm.controller;
 
-import cn.myfourm.entity.*;
-import cn.myfourm.service.dataAreaService;
+import cn.myfourm.entity.RespBean;
+import cn.myfourm.entity.RespPageBean;
+import cn.myfourm.entity.dataServerType;
 import cn.myfourm.service.dataServerTypeService;
-import cn.myfourm.service.impl.UserDetailsImpl;
-import cn.myfourm.service.sysUserService;
-import cn.myfourm.utils.JwtUtil;
-import cn.myfourm.utils.RedisUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 @Controller
 @ResponseBody
 @RequestMapping("/dataServerType")

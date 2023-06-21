@@ -43,8 +43,8 @@
               <span>营销管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>销售机会管理</el-menu-item>
-              <el-menu-item style="margin-left:50px;" index=""><i class="el-icon-tickets"></i>客户开发计划</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/salechancemanage"><i class="el-icon-tickets"></i>销售机会管理</el-menu-item>
+              <el-menu-item style="margin-left:50px;" index="/salechancedevelop"><i class="el-icon-tickets"></i>客户开发计划</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
